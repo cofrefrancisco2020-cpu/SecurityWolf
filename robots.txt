@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Agregar la URL absoluta del sitemap cuando se confirme el dominio final.
