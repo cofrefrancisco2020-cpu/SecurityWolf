@@ -38,6 +38,45 @@ const revealObserver = new IntersectionObserver(
 
 document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
 
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+const heroVisual = document.querySelector("[data-parallax-zone]");
+
+if (heroVisual && !reducedMotion.matches && finePointer.matches) {
+  heroVisual.addEventListener("pointermove", (event) => {
+    const bounds = heroVisual.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    heroVisual.style.setProperty("--parallax-x", `${x * 12}px`);
+    heroVisual.style.setProperty("--parallax-y", `${y * 10}px`);
+    heroVisual.style.setProperty("--parallax-rx", `${y * -2.4}deg`);
+    heroVisual.style.setProperty("--parallax-ry", `${x * 2.4}deg`);
+  });
+
+  heroVisual.addEventListener("pointerleave", () => {
+    heroVisual.style.setProperty("--parallax-x", "0px");
+    heroVisual.style.setProperty("--parallax-y", "0px");
+    heroVisual.style.setProperty("--parallax-rx", "0deg");
+    heroVisual.style.setProperty("--parallax-ry", "0deg");
+  });
+}
+
+if (!reducedMotion.matches && finePointer.matches) {
+  document.querySelectorAll(".pillar-card").forEach((card) => {
+    const media = card.querySelector(".pillar-media");
+    if (!media) return;
+
+    card.addEventListener("pointermove", (event) => {
+      const bounds = media.getBoundingClientRect();
+      const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+      const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+      media.style.setProperty("--spot-x", `${Math.max(0, Math.min(100, x))}%`);
+      media.style.setProperty("--spot-y", `${Math.max(0, Math.min(100, y))}%`);
+    });
+  });
+}
+
 document.querySelectorAll(".faq-item button").forEach((button) => {
   button.addEventListener("click", () => {
     const item = button.closest(".faq-item");

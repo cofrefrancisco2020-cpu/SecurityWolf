@@ -9,16 +9,16 @@ Opción rápida: abrir `index.html` con el navegador.
 Opción recomendada para revisar localmente:
 
 ```powershell
-python -m http.server 4173 --bind 127.0.0.1
+python -m http.server 4317 --bind 127.0.0.1
 ```
 
-Luego visitar `http://127.0.0.1:4173/`.
+Luego visitar `http://127.0.0.1:4317/`.
 
 ## Archivos principales
 
 - `index.html`: contenido, estructura semántica y metadatos.
 - `styles.css`: identidad visual, responsive y animaciones.
-- `script.js`: menú móvil, acordeón, animaciones y formulario a WhatsApp.
+- `script.js`: menú móvil, acordeón, aparición al hacer scroll, parallax sutil y formulario a WhatsApp.
 - `vercel.json`: configuración de URL y cabeceras básicas de seguridad.
 - `robots.txt`: rastreo habilitado; falta agregar el sitemap cuando exista dominio.
 - `brief-marca.md`: investigación, decisiones y limitaciones de esta versión.
@@ -44,7 +44,7 @@ La web no requiere Node.js, paquetes ni compilación. Vercel servirá directamen
 
 ## Antes de conectar el dominio definitivo
 
-- Confirmar el listado real de servicios con el propietario.
+- Confirmar el alcance específico de cada servicio digital, privado y jurídico.
 - Confirmar si la atención se comunica como nacional, regional o local.
 - Confirmar el teléfono `+56 9 6456 0874` y el texto de WhatsApp.
 - Añadir correo, ciudad, dirección, horarios y redes sociales si existen.
@@ -55,11 +55,17 @@ La web no requiere Node.js, paquetes ni compilación. Vercel servirá directamen
 ## Notas funcionales
 
 - El formulario no almacena datos: construye el mensaje y abre WhatsApp para que el visitante lo envíe.
+- El hero reacciona suavemente al cursor en equipos con mouse; las fotografías, nodos y barridos mantienen movimiento ambiental sin bloquear la navegación.
+- Todas las animaciones respetan `prefers-reduced-motion` y se reducen automáticamente si el visitante lo solicita desde su sistema.
 - No se incluyeron precios, certificaciones, clientes, reseñas ni cifras porque no fueron entregados ni verificados.
 - La web usa Google Fonts. Si se desea eliminar toda dependencia externa, se pueden reemplazar por tipografías del sistema.
 
 ## Recursos visuales
 
 - `logo-silver-wolf-services.png`: logo real entregado por el usuario, sin modificación.
-- `og-silver-wolf-services.png`: tarjeta social generada con IA a partir de la identidad real, con el texto revisado.
-
+- `ciberseguridad-silver-wolf-soc.png`: escena de monitoreo digital generada con IA, con identidad Silver Wolf aplicada al uniforme y estación de trabajo.
+- `defensa-digital-silver-wolf.png`: composición de defensa digital generada con IA, construida alrededor del escudo de la marca.
+- `seguridad-privada-equipo-silver-wolf.png`: foto entregada, mejorada y rebrandeada con el escudo en uniformes.
+- `guardias-silver-wolf-control-acceso.png`: foto entregada, mejorada y rebrandeada con el escudo en uniformes.
+- `asesoria-legal-silver-wolf-ai.png`: escena jurídica representativa generada con IA; no corresponde a integrantes reales del estudio.
+- `og-silver-wolf-services.png`: tarjeta social actualizada con las tres áreas de servicio y texto revisado.
