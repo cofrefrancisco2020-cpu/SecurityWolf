@@ -1,8 +1,10 @@
 # Brief de marca — Silver Wolf Services
 
-**Versión:** 1  
+**Versión:** 2  
 **Fecha de revisión:** 1 de septiembre de 2026  
 **Objetivo:** presentar Silver Wolf Services como una marca de seguridad integral que reúne ciberseguridad, seguridad privada y asesoría jurídica, lista para presentar al propietario y preparada para GitHub + Vercel.
+
+**Cambio principal de la versión 2:** corrección de compatibilidad con la preferencia de movimiento del navegador y refuerzo visible de órbitas, barridos, pulsos y movimiento ambiental.
 
 ## Fuentes revisadas
 
@@ -90,7 +92,7 @@ Las especialidades, disponibilidad, cobertura, habilitaciones, tiempos de respue
 - Servicios modulares y escenarios de necesidad, sin precios, licencias, especialidades o promesas inventadas.
 - Formulario que abre WhatsApp con el mensaje ya estructurado.
 - Sistema de movimiento ambiental: respiración del escudo, nodos pulsantes, fotografías con desplazamiento lento, barridos de detección y respuesta discreta al cursor.
-- El movimiento se orquesta con ritmos distintos para evitar repetición y se desactiva mediante `prefers-reduced-motion` cuando el visitante lo solicita.
+- El movimiento se orquesta con ritmos distintos para evitar repetición. Con `prefers-reduced-motion` se retiran el parallax y las entradas de desplazamiento, mientras los indicadores esenciales de defensa mantienen una señal visual controlada.
 - HTML, CSS y JavaScript puros para máxima portabilidad en GitHub Pages y Vercel.
 
 ## Imágenes y transformaciones

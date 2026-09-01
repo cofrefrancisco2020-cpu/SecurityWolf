@@ -1,6 +1,8 @@
-# Silver Wolf Services — versión 1
+# Silver Wolf Services — versión 2
 
 Propuesta web estática, responsive y lista para subir a GitHub y desplegar en Vercel.
+
+Esta versión corrige el bloqueo de animaciones detectado cuando Chrome informa `prefers-reduced-motion` y hace más visibles la órbita, el radar, los pulsos y los barridos de las fotografías.
 
 ## Cómo abrirla
 
@@ -56,7 +58,7 @@ La web no requiere Node.js, paquetes ni compilación. Vercel servirá directamen
 
 - El formulario no almacena datos: construye el mensaje y abre WhatsApp para que el visitante lo envíe.
 - El hero reacciona suavemente al cursor en equipos con mouse; las fotografías, nodos y barridos mantienen movimiento ambiental sin bloquear la navegación.
-- Todas las animaciones respetan `prefers-reduced-motion` y se reducen automáticamente si el visitante lo solicita desde su sistema.
+- Con `prefers-reduced-motion` se eliminan el parallax del cursor y las entradas al hacer scroll; los indicadores esenciales de defensa conservan un movimiento visible y controlado.
 - No se incluyeron precios, certificaciones, clientes, reseñas ni cifras porque no fueron entregados ni verificados.
 - La web usa Google Fonts. Si se desea eliminar toda dependencia externa, se pueden reemplazar por tipografías del sistema.
 
