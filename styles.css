@@ -1142,6 +1142,16 @@ h1 span {
 .defense-points p { margin: 0; color: #555d62; font-size: 0.76rem; line-height: 1.6; }
 .defense-points strong { color: #17191b; }
 
+.sector { position: relative; overflow: hidden; background: #171a1d; border-top: 1px solid #30353a; border-bottom: 1px solid #30353a; }
+.sector::before { content: ""; position: absolute; inset: 0; opacity: .3; background: radial-gradient(circle at 25% 50%, rgba(188, 211, 220, .16), transparent 42%), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: auto, 76px 76px; pointer-events: none; }
+.sector-grid { position: relative; display: grid; grid-template-columns: .7fr 1fr; align-items: center; gap: clamp(36px, 8vw, 130px); }
+.sector-emblem { min-height: 330px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.13); background: radial-gradient(circle at center, #242a2f, #090b0d 70%); overflow: hidden; }
+.sector-emblem img { width: min(68%, 290px); height: auto; aspect-ratio: 1; object-fit: contain; filter: grayscale(1) contrast(1.08); animation: sector-float 7s ease-in-out infinite; }
+.sector-copy .section-kicker { margin-bottom: 18px; color: #a9b5bb; }
+.sector-copy h2 { max-width: 720px; font-size: clamp(2.8rem, 5.2vw, 5.8rem); }
+.sector-copy > p:not(.section-kicker) { max-width: 600px; margin: 28px 0 26px; color: #a3adb3; font-size: .88rem; line-height: 1.8; }
+@keyframes sector-float { 0%, 100% { transform: translateY(-5px) scale(.985); } 50% { transform: translateY(6px) scale(1.015); } }
+
 .method { background: #090b0d; }
 .method-head { margin-bottom: 76px; }
 .method-track { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
@@ -1345,6 +1355,8 @@ h1 span {
   .service-feature-media, .service-feature-media img { min-height: 520px; }
   .defense-grid, .contact-grid { grid-template-columns: 1fr; gap: 65px; }
   .defense-copy { order: -1; }
+  .sector-grid { grid-template-columns: 1fr; gap: 42px; }
+  .sector-emblem { min-height: 280px; }
   .method-track { grid-template-columns: repeat(2, 1fr); }
   .faq-grid { grid-template-columns: 1fr; gap: 55px; }
   .faq-heading { position: static; }
@@ -1392,6 +1404,8 @@ h1 span {
   .defense-grid { gap: 48px; }
   .defense-panel { min-height: 430px; padding: 20px; }
   .defense-stats span { font-size: .68rem; }
+  .sector-emblem { min-height: 230px; }
+  .sector-emblem img { width: min(58%, 200px); }
   .method-track { grid-template-columns: 1fr; }
   .method-step { min-height: 210px; }
   .solution-row { padding: 28px 0; grid-template-columns: 35px 1fr; gap: 12px; }
@@ -1414,4 +1428,5 @@ h1 span {
   html { scroll-behavior: auto; }
   .radar { transition: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
