@@ -1426,7 +1426,34 @@ h1 span {
 .footer-grid { padding-bottom: 48px; display: grid; grid-template-columns: 1fr .8fr .7fr; align-items: center; gap: 30px; }
 .footer-grid > p { margin: 0; color: #6f787e; font-size: .72rem; }
 .footer-grid nav { display: flex; justify-content: flex-end; gap: 24px; color: #a2a9ad; font-size: .68rem; }
+.instagram-footer-link { display: inline-flex; align-items: center; gap: 7px; }
+.instagram-footer-link svg { width: 18px; height: 18px; flex: 0 0 auto; filter: drop-shadow(0 0 8px rgba(240,0,115,.22)); }
+.instagram-footer-link:hover span,
+.instagram-footer-link:focus-visible span { color: #f0f2f3; }
 .footer-bottom { padding-top: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; color: #50585e; font-size: .61rem; }
+.instagram-popup { position: fixed; z-index: 30; left: 24px; bottom: 24px; width: min(660px, calc(100vw - 48px)); border: 1px solid rgba(255,255,255,.18); border-radius: 12px; overflow: hidden; color: #eef2f4; background: rgba(7,9,11,.97); box-shadow: 0 26px 90px rgba(0,0,0,.58), 0 0 0 1px rgba(169,232,255,.04); opacity: 0; visibility: hidden; transform: translate3d(0, 22px, 0) scale(.985); transform-origin: left bottom; pointer-events: none; transition: opacity 320ms ease, transform 420ms cubic-bezier(.22,.8,.25,1), visibility 320ms ease; }
+.instagram-popup::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(118deg, rgba(255,255,255,.08), transparent 24%, transparent 73%, rgba(240,0,115,.08)); }
+.instagram-popup.is-visible { opacity: 1; visibility: visible; transform: translate3d(0,0,0) scale(1); pointer-events: auto; }
+.instagram-popup-link { min-height: 260px; display: grid; grid-template-columns: 42% 58%; color: inherit; }
+.instagram-popup-media { position: relative; min-height: 260px; overflow: hidden; background: #080a0d; }
+.instagram-popup-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 70%, rgba(7,9,11,.95)); pointer-events: none; }
+.instagram-popup-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 600ms ease; }
+.instagram-popup-link:hover .instagram-popup-media img,
+.instagram-popup-link:focus-visible .instagram-popup-media img { transform: scale(1.035); }
+.instagram-popup-copy { position: relative; z-index: 2; padding: 34px 38px 30px 30px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+.instagram-popup-kicker { margin-bottom: 12px; color: #a9e8ff; font-family: var(--font-display); font-size: .66rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.instagram-popup-copy > strong { max-width: 290px; font-family: var(--font-display); font-size: clamp(2rem, 3.2vw, 2.65rem); font-weight: 600; line-height: .95; letter-spacing: -.02em; text-transform: uppercase; }
+.instagram-popup-text { max-width: 310px; margin-top: 14px; color: #9ca5aa; font-size: .78rem; line-height: 1.55; }
+.instagram-popup-account { margin-top: 18px; display: inline-flex; align-items: center; gap: 9px; color: #f3f5f6; font-size: .8rem; font-weight: 700; }
+.instagram-popup-account svg { width: 22px; height: 22px; flex: 0 0 auto; filter: drop-shadow(0 0 10px rgba(240,0,115,.3)); }
+.instagram-popup-action { margin-top: 16px; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,.5); color: #dce1e3; font-family: var(--font-display); font-size: .67rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.instagram-popup-close { position: absolute; z-index: 4; top: 12px; right: 12px; width: 34px; height: 34px; padding: 0; border: 1px solid rgba(255,255,255,.24); border-radius: 50%; display: grid; place-items: center; color: #fff; background: rgba(6,8,10,.78); backdrop-filter: blur(8px); cursor: pointer; transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease; }
+.instagram-popup-close::before,
+.instagram-popup-close::after { content: ""; position: absolute; width: 13px; height: 1px; background: currentColor; }
+.instagram-popup-close::before { transform: rotate(45deg); }
+.instagram-popup-close::after { transform: rotate(-45deg); }
+.instagram-popup-close:hover,
+.instagram-popup-close:focus-visible { border-color: rgba(255,255,255,.6); background: #181c20; transform: rotate(4deg); }
 .whatsapp-float { position: fixed; z-index: 12; right: 22px; bottom: 20px; height: 45px; padding: 0 5px 0 16px; border: 1px solid rgba(255,255,255,.19); border-radius: 30px; display: flex; align-items: center; gap: 12px; color: #0a0c0e; background: #eef2f3; box-shadow: 0 14px 40px rgba(0,0,0,.32); font-size: .66rem; font-weight: 700; transition: transform 180ms ease; }
 .whatsapp-float:hover { transform: translateY(-3px); }
 .whatsapp-float i { width: 35px; height: 35px; border-radius: 50%; display: grid; place-items: center; color: #eff2f3; background: #101315; box-shadow: 0 0 0 0 rgba(16,19,21,.2); font-style: normal; animation: whatsapp-pulse 4.8s ease-out infinite; }
@@ -1633,8 +1660,20 @@ h1 span {
   .contact-form { padding: 23px 18px; }
   .form-row { grid-template-columns: 1fr; gap: 0; }
   .footer-grid { grid-template-columns: 1fr; }
-  .footer-grid nav { grid-column: auto; }
+  .footer-grid nav { grid-column: auto; flex-wrap: wrap; justify-content: flex-start; }
   .footer-bottom { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .instagram-popup { left: 12px; bottom: 72px; width: calc(100vw - 24px); max-height: calc(100vh - 94px); overflow-y: auto; border-radius: 10px; }
+  .instagram-popup-link { min-height: 0; grid-template-columns: 124px 1fr; }
+  .instagram-popup-media { min-height: 214px; }
+  .instagram-popup-media::after { background: linear-gradient(90deg, transparent 55%, rgba(7,9,11,.9)); }
+  .instagram-popup-copy { min-width: 0; padding: 31px 34px 25px 15px; }
+  .instagram-popup-kicker { margin-bottom: 8px; font-size: .55rem; letter-spacing: .12em; }
+  .instagram-popup-copy > strong { font-size: clamp(1.55rem, 8vw, 2.05rem); }
+  .instagram-popup-text { margin-top: 10px; font-size: .68rem; line-height: 1.42; }
+  .instagram-popup-account { margin-top: 13px; gap: 6px; font-size: .67rem; }
+  .instagram-popup-account svg { width: 19px; height: 19px; }
+  .instagram-popup-action { margin-top: 12px; font-size: .58rem; }
+  .instagram-popup-close { top: 8px; right: 8px; width: 30px; height: 30px; }
   .whatsapp-float { right: 14px; bottom: 14px; }
   .whatsapp-float span { display: none; }
   .whatsapp-float { width: 45px; padding: 4px; }

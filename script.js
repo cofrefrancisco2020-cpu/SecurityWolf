@@ -199,3 +199,46 @@ document.querySelector("#contact-form")?.addEventListener("submit", (event) => {
 
 const year = document.querySelector("#current-year");
 if (year) year.textContent = new Date().getFullYear();
+
+const instagramPopup = document.querySelector("#instagram-popup");
+const instagramPopupClose = instagramPopup?.querySelector(".instagram-popup-close");
+const instagramDismissKey = "silver-wolf-instagram-popup-dismissed";
+const instagramDismissDays = 14;
+
+const readInstagramDismissal = () => {
+  try {
+    const dismissedAt = Number(localStorage.getItem(instagramDismissKey));
+    const maxAge = instagramDismissDays * 24 * 60 * 60 * 1000;
+    return Number.isFinite(dismissedAt) && Date.now() - dismissedAt < maxAge;
+  } catch {
+    return false;
+  }
+};
+
+const setInstagramPopup = (open, remember = false) => {
+  if (!instagramPopup) return;
+  instagramPopup.classList.toggle("is-visible", open);
+  instagramPopup.setAttribute("aria-hidden", String(!open));
+
+  if (remember) {
+    try {
+      localStorage.setItem(instagramDismissKey, String(Date.now()));
+    } catch {
+      // The popup still closes when browser storage is unavailable.
+    }
+  }
+};
+
+if (instagramPopup && !readInstagramDismissal()) {
+  window.setTimeout(() => setInstagramPopup(true), 1400);
+}
+
+instagramPopupClose?.addEventListener("click", () => {
+  setInstagramPopup(false, true);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && instagramPopup?.classList.contains("is-visible")) {
+    setInstagramPopup(false, true);
+  }
+});
