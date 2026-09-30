@@ -18,11 +18,48 @@ menuButton?.addEventListener("click", () => {
 
 mobileLinks.forEach((link) => link.addEventListener("click", () => setMenu(false)));
 
-window.addEventListener(
-  "scroll",
-  () => header?.classList.toggle("is-scrolled", window.scrollY > 36),
-  { passive: true },
-);
+const progressBar = document.querySelector(".page-progress span");
+const sectionRailLinks = [...document.querySelectorAll(".section-rail a")];
+const desktopLinks = [...document.querySelectorAll(".desktop-nav a")];
+const trackedSections = sectionRailLinks
+  .map((link) => document.querySelector(`#${link.dataset.section}`))
+  .filter(Boolean);
+let scrollFrame = null;
+
+const updatePageState = () => {
+  const scrollLimit = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  const ratio = Math.min(1, Math.max(0, window.scrollY / scrollLimit));
+  progressBar?.style.setProperty("transform", `scaleX(${ratio})`);
+  header?.classList.toggle("is-scrolled", window.scrollY > 36);
+
+  const checkpoint = window.scrollY + window.innerHeight * 0.42;
+  const activeSection = trackedSections.reduce((active, section) => {
+    return section.offsetTop <= checkpoint ? section : active;
+  }, trackedSections[0]);
+
+  sectionRailLinks.forEach((link) => {
+    const isActive = link.dataset.section === activeSection?.id;
+    link.classList.toggle("is-active", isActive);
+    if (isActive) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+
+  desktopLinks.forEach((link) => {
+    const target = link.getAttribute("href")?.slice(1);
+    link.classList.toggle("is-active", target === activeSection?.id);
+  });
+
+  scrollFrame = null;
+};
+
+const requestPageUpdate = () => {
+  if (scrollFrame !== null) return;
+  scrollFrame = window.requestAnimationFrame(updatePageState);
+};
+
+window.addEventListener("scroll", requestPageUpdate, { passive: true });
+window.addEventListener("resize", requestPageUpdate, { passive: true });
+updatePageState();
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -76,6 +113,51 @@ if (!reducedMotion.matches && finePointer.matches) {
     });
   });
 }
+
+document.querySelectorAll(".service-card").forEach((card, index) => {
+  const description = card.querySelector(":scope > p");
+  const list = card.querySelector(":scope > ul");
+  if (!description || !list) return;
+
+  const detail = document.createElement("div");
+  const detailId = `service-detail-${index + 1}`;
+  detail.className = "service-card-detail";
+  detail.id = detailId;
+  detail.append(description, list);
+
+  const toggle = document.createElement("button");
+  toggle.className = "service-toggle";
+  toggle.type = "button";
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-controls", detailId);
+  toggle.innerHTML = '<span>Ver alcance</span><i aria-hidden="true"></i>';
+
+  card.classList.add("is-collapsible");
+  card.append(toggle, detail);
+
+  toggle.addEventListener("click", () => {
+    const shouldOpen = toggle.getAttribute("aria-expanded") !== "true";
+
+    document.querySelectorAll(".service-card.is-expanded").forEach((openCard) => {
+      if (openCard === card) return;
+      openCard.classList.remove("is-expanded");
+      const openToggle = openCard.querySelector(".service-toggle");
+      const openDetail = openCard.querySelector(".service-card-detail");
+      openToggle?.setAttribute("aria-expanded", "false");
+      if (openDetail) openDetail.style.maxHeight = "0px";
+    });
+
+    card.classList.toggle("is-expanded", shouldOpen);
+    toggle.setAttribute("aria-expanded", String(shouldOpen));
+    detail.style.maxHeight = shouldOpen ? `${detail.scrollHeight}px` : "0px";
+  });
+});
+
+window.addEventListener("resize", () => {
+  document.querySelectorAll(".service-card.is-expanded .service-card-detail").forEach((detail) => {
+    detail.style.maxHeight = `${detail.scrollHeight}px`;
+  });
+});
 
 document.querySelectorAll(".faq-item button").forEach((button) => {
   button.addEventListener("click", () => {
