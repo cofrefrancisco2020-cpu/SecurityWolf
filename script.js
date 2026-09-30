@@ -115,7 +115,7 @@ if (!reducedMotion.matches && finePointer.matches) {
 }
 
 document.querySelectorAll(".service-card").forEach((card, index) => {
-  const description = card.querySelector(":scope > p");
+  const description = card.querySelector(":scope > .service-detail-copy");
   const list = card.querySelector(":scope > ul");
   if (!description || !list) return;
 
@@ -130,7 +130,7 @@ document.querySelectorAll(".service-card").forEach((card, index) => {
   toggle.type = "button";
   toggle.setAttribute("aria-expanded", "false");
   toggle.setAttribute("aria-controls", detailId);
-  toggle.innerHTML = '<span>Ver alcance</span><i aria-hidden="true"></i>';
+  toggle.innerHTML = '<span>Más información</span><i aria-hidden="true"></i>';
 
   card.classList.add("is-collapsible");
   card.append(toggle, detail);
