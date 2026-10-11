@@ -194,7 +194,7 @@ document.querySelector("#contact-form")?.addEventListener("submit", (event) => {
     `Mensaje: ${message || "Quiero coordinar una conversación inicial."}`,
   ].join("\n");
 
-  window.open(`https://wa.me/56964560874?text=${encodeURIComponent(body)}`, "_blank", "noopener,noreferrer");
+  window.open(`https://wa.me/56921830252?text=${encodeURIComponent(body)}`, "_blank", "noopener,noreferrer");
 });
 
 const year = document.querySelector("#current-year");
